@@ -12,6 +12,7 @@ function main() {
 }
 
 function tick() {
+  screenManager = new ScreenManager();
   now = Date.now();
   deltaTime = (now - last) / 1000;
   last = now;
