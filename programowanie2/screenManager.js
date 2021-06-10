@@ -4,7 +4,9 @@ class ScreenManager {
   }
 
   pushScreen(screen) {
-    if (this.screenStack.length > 0) this.screenStack[0].pause();
+    if (this.screenStack.length > 0) {
+      this.screenStack[0].pause();
+    }
     this.screenStack.unshift(screen);
   }
 

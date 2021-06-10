@@ -32,4 +32,5 @@ class Screen {
   onKeyUp(key) {
     this.keyState[key] = false;
   }
+  pause() {}
 }
