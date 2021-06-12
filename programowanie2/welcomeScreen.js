@@ -5,6 +5,7 @@ class WelcomeScreen extends Screen {
     this.bubblesWidth = 60;
     this.bubblesheight = 10;
     this.bubbles = [];
+    this.colors = ["rgb(255,0,30)", "rgb(60,0,220)"];
     this.start = false;
     this.welcomeText = "programowanie2";
     this.createBubbles = function () {
@@ -12,19 +13,22 @@ class WelcomeScreen extends Screen {
         for (let k = 0; k < this.bubblesheight; k++) {
           let r = 3;
           let speedX = Math.random() * 1;
-          let randomX = [speedX, "-" + speedX];
+          let randomX = [speedX, -1 * +speedX];
           let speedY = Math.random() * 1;
-          let randomY = [speedY, "-" + speedY];
+          let randomY = [speedY, -1 * +speedY];
           let nbrRandomX = Math.floor(Math.random() * 2);
           let nbrRandomY = Math.floor(Math.random() * 2);
+          //let nbrColor = Math.floor(Math.random() * 2);
           let newBubble = new Bubble(
             canvas.width / 2 + j * 5 - 120,
             canvas.height / 2 + k * 5 - 30,
             r,
             randomX[nbrRandomX],
-            randomY[nbrRandomY]
+            randomY[nbrRandomY],
+            this.colors[(nbrRandomY + nbrRandomX) % 2]
           );
           this.bubbles.push(newBubble);
+          console.log(randomY[nbrRandomY]);
         }
       }
     };
@@ -48,11 +52,18 @@ class WelcomeScreen extends Screen {
     ctx.fillText(this.welcomeText, canvas.width / 2 - 120, canvas.height / 2);
   }
   update() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (this.start) {
+      this.ticks++;
+      if (this.ticks == 100) {
+        for (let m = this.bubbles.length - 1; m >= 0; m--) {
+          this.bubbles[m].reverse();
+        }
+      }
       for (let m = this.bubbles.length - 1; m >= 0; m--) {
         this.bubbles[m].update();
       }
+      console.log(this.bubbles.length);
     }
   }
 }
