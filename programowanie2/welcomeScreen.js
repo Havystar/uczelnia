@@ -2,6 +2,22 @@ class WelcomeScreen extends Screen {
   constructor() {
     super();
     this.ticks = 0;
+    this.menuBtns = new Array();
+    this.menuBtns.push(
+      new Button(
+        600,
+        300,
+        100,
+        100,
+        "enter",
+        "rgba(255,0,0,255)",
+        "rgba(255,255,255,255)",
+        40,
+        () => {
+          screenManager.pushScreen(new MenuScreen());
+        }
+      )
+    );
     this.bubblesWidth = 60;
     this.bubblesheight = 10;
     this.bubbles = [];
@@ -28,7 +44,6 @@ class WelcomeScreen extends Screen {
             this.colors[(nbrRandomY + nbrRandomX) % 2]
           );
           this.bubbles.push(newBubble);
-          console.log(randomY[nbrRandomY]);
         }
       }
     };
@@ -40,6 +55,9 @@ class WelcomeScreen extends Screen {
       //after some time reverse prosess.
     }
     this.start = true;
+    for (let j = 0; j < this.menuBtns.length; j++) {
+      this.menuBtns[j].onClick(this.mouse);
+    }
   }
   draw() {
     ctx.beginPath();
@@ -63,7 +81,9 @@ class WelcomeScreen extends Screen {
       for (let m = this.bubbles.length - 1; m >= 0; m--) {
         this.bubbles[m].update();
       }
-      console.log(this.bubbles.length);
+      for (let j = 0; j < this.menuBtns.length; j++) {
+        this.menuBtns[j].draw();
+      }
     }
   }
 }
