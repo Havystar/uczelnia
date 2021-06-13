@@ -26,7 +26,7 @@ class Button {
     ctx.fillStyle = this.backgroundColor;
     ctx.fillRect(this.x, this.y, this.width, this.height);
     ctx.font = this.fontSize + "px Georgia";
-    ctx.fillStyle = this.textcolor;
+    ctx.fillStyle = this.textColor;
     ctx.textAlign = "center";
     console.log(
       this.text,
