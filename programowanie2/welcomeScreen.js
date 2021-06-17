@@ -2,25 +2,10 @@ class WelcomeScreen extends Screen {
   constructor() {
     super();
     this.ticks = 0;
-    this.menuBtns = new Array();
-    this.menuBtns.push(
-      new Button(
-        600,
-        300,
-        100,
-        100,
-        "enter",
-        "rgba(255,0,0,255)",
-        "rgba(255,255,255,255)",
-        40,
-        () => {
-          screenManager.pushScreen(new MenuScreen());
-        }
-      )
-    );
     this.bubblesWidth = 60;
     this.bubblesheight = 10;
-    this.bubbles = [];
+    this.focused = true;
+    this.bubbles = new Array();
     this.colors = ["rgb(255,0,30)", "rgb(60,0,220)"];
     this.start = false;
     this.welcomeText = "programowanie2";
@@ -52,11 +37,7 @@ class WelcomeScreen extends Screen {
 
   onClick() {
     if (this.start == false) {
-      //after some time reverse prosess.
-    }
-    this.start = true;
-    for (let j = 0; j < this.menuBtns.length; j++) {
-      this.menuBtns[j].onClick(this.mouse);
+      this.start = true;
     }
   }
   draw() {
@@ -78,11 +59,12 @@ class WelcomeScreen extends Screen {
           this.bubbles[m].reverse();
         }
       }
+      if (this.ticks == 10) {
+        screenManager.pushScreen(new MenuScreen());
+        this.focused = false;
+      }
       for (let m = this.bubbles.length - 1; m >= 0; m--) {
         this.bubbles[m].update();
-      }
-      for (let j = 0; j < this.menuBtns.length; j++) {
-        this.menuBtns[j].draw();
       }
     }
   }
