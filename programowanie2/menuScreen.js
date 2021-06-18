@@ -28,10 +28,7 @@ class MenuScreen extends Screen {
         "Author",
         "rgba(255,0,0,1)",
         "rgba(255,255,255,1)",
-        40,
-        () => {
-          screenManager.pushScreen(new PauseScreen());
-        }
+        40
       )
     );
   }
@@ -44,8 +41,9 @@ class MenuScreen extends Screen {
       }
     }
   }
-  
+
   draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let j = 0; j < this.menuBtns.length; j++) {
       this.menuBtns[j].draw();
     }

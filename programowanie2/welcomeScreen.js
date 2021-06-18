@@ -4,6 +4,8 @@ class WelcomeScreen extends Screen {
     this.ticks = 0;
     this.bubblesWidth = 60;
     this.bubblesheight = 10;
+    this.firstStageTime = 100;
+    this.secoundStageTime = 10;
     this.focused = true;
     this.bubbles = new Array();
     this.colors = ["rgb(255,0,30)", "rgb(60,0,220)"];
@@ -54,12 +56,12 @@ class WelcomeScreen extends Screen {
     //ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (this.start) {
       this.ticks++;
-      if (this.ticks == 100) {
+      if (this.ticks == this.firstStageTime) {
         for (let m = this.bubbles.length - 1; m >= 0; m--) {
           this.bubbles[m].reverse();
         }
       }
-      if (this.ticks == 10) {
+      if (this.ticks == this.secoundStageTime) {
         screenManager.pushScreen(new MenuScreen());
         this.focused = false;
       }
