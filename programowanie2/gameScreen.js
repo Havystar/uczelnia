@@ -4,17 +4,23 @@ class GameScreen extends Screen {
     this.pauseKey = 69;
     this.actionKey = 101;
     this.map = new Array();
+    this.background = new Background();
+    this.player = new Player(0, 0);
   }
 
-  update() {}
+  update() {
+    this.player.update();
+    this.background.update(this.player.getXPosition());
+  }
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.background.draw(this.ticks);
   }
   onClick(x, y, buttons) {
     super.onClick(x, y, buttons);
   }
   onKeyDown(key) {
-    console.log(key);
+    this.player.onKeyDown(key);
     if (key == this.pauseKey) {
       screenManager.pushScreen(new PauseScreen());
     }
@@ -22,5 +28,7 @@ class GameScreen extends Screen {
     }
     super.onKeyDown(key);
   }
-  onKeyUp(key) {}
+  onKeyUp(key) {
+    this.player.onKeyUp(key);
+  }
 }
