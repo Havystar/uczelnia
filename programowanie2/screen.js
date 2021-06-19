@@ -1,11 +1,7 @@
 class Screen {
   constructor() {
-    this.keyState = new Array(128);
     this.mouse = { x: 0, y: 0, buttons: 0, prevButtons: 0 };
-    this.keyUp = 87;
-    this.keyDown = 83;
-    this.keyLeft = 65;
-    this.keyRight = 68;
+    this.ticks = 0;
   }
 
   update() {}
@@ -25,12 +21,8 @@ class Screen {
     this.mouse.y = y;
   }
 
-  onKeyDown(key) {
-    this.keyState[key] = true;
-  }
+  onKeyDown() {}
 
-  onKeyUp(key) {
-    this.keyState[key] = false;
-  }
+  onKeyUp() {}
   pause() {}
 }

@@ -5,16 +5,18 @@ class GameScreen extends Screen {
     this.actionKey = 101;
     this.map = new Array();
     this.background = new Background();
-    this.player = new Player(0, 0);
+    this.player = new Player(100, 100);
   }
 
   update() {
+    this.ticks++;
     this.player.update();
     this.background.update(this.player.getXPosition());
   }
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.background.draw(this.ticks);
+    this.player.draw(this.ticks);
   }
   onClick(x, y, buttons) {
     super.onClick(x, y, buttons);
