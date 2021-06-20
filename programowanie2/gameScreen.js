@@ -5,7 +5,7 @@ class GameScreen extends Screen {
     this.actionKey = 101;
     this.map = new Array();
     this.background = new Background();
-    this.player = new Player(100, 100);
+    this.player = new Player(canvas.width / 2, canvas.height / 2);
   }
 
   update() {
