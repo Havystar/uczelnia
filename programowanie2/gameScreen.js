@@ -6,6 +6,7 @@ class GameScreen extends Screen {
     this.map = new Array();
     this.background = new Background();
     this.player = new Player(canvas.width / 2, canvas.height / 2);
+    this.messageMessage = new MessageManager();
   }
 
   update() {
@@ -26,7 +27,8 @@ class GameScreen extends Screen {
     if (key == this.pauseKey) {
       screenManager.pushScreen(new PauseScreen());
     }
-    if (key == this.enterKey) {
+    if (key == this.actionKey) {
+      // messageMessage.pushMessage();
     }
     super.onKeyDown(key);
   }
