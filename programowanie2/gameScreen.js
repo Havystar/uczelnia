@@ -6,13 +6,14 @@ class GameScreen extends Screen {
     this.map = new Array();
     this.background = new Background();
     this.player = new Player(canvas.width / 2, canvas.height / 2);
-    this.messageMessage = new MessageManager();
+    this.messages = new MessageManager();
   }
 
   update() {
     this.ticks++;
     this.player.update();
     this.background.update(this.player.getXPosition());
+    this.focused = this.messages.update(time);
   }
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -28,7 +29,7 @@ class GameScreen extends Screen {
       screenManager.pushScreen(new PauseScreen());
     }
     if (key == this.actionKey) {
-      // messageMessage.pushMessage();
+      // this.messages.pushMessage();
     }
     super.onKeyDown(key);
   }
