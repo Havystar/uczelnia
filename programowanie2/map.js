@@ -9,7 +9,7 @@ class Map extends sprite {
       0, 1, 18, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 48, 49, 50,
       51, 52, 76, 66, 82, 83,
     ];
-    this.smallPlatform = [78, 79, 80, 91, 92, 93];
+    this.smallPlatform = [78, 79, 80, 81, 91, 92, 93];
     this.allPlatforms = this.bigPlatform.concat(this.smallPlatform);
     this.map = [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
