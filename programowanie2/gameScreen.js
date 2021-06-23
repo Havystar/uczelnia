@@ -6,7 +6,7 @@ class GameScreen extends Screen {
     this.focused = true;
     this.background = new Background();
     this.map = new Map();
-    this.player = new Player(100, canvas.height - 64 - 16);
+    this.player = new Player(100, 0);
     this.messages = new MessageManager();
   }
 
