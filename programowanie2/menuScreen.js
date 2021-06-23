@@ -8,10 +8,10 @@ class MenuScreen extends Screen {
     this.menuBtns.push(
       new Button(
         500,
-        100,
+        150,
         300,
         100,
-        "New game",
+        "NEW GAME",
         "rgba(255,0,0,1)",
         "rgba(255,255,255,1)",
         40,
@@ -23,25 +23,56 @@ class MenuScreen extends Screen {
     this.menuBtns.push(
       new Button(
         500,
-        250,
+        300,
         300,
         100,
-        "Author",
+        "AUTHOR",
         "rgba(255,0,0,1)",
         "rgba(255,255,255,1)",
         40,
         () => {
-          this.messages.pushMessage(new Message(
-            0,
-            0,
-            1280,
-            720,
-            "Kamil Kowalczyk wydział MS informatyka",
-            "rgba(255,255,255,1)",
-            40,
-            time,
-            time+5));
-            this.focused = false;
+          this.messages.pushMessage(
+            new Message(
+              0,
+              0,
+              1280,
+              720,
+              "Kamil Kowalczyk wydział MS informatyka",
+              "rgba(255,255,255,1)",
+              40,
+              time,
+              time + 5
+            )
+          );
+          this.focused = false;
+        }
+      )
+    );
+    this.menuBtns.push(
+      new Button(
+        500,
+        450,
+        300,
+        100,
+        "CREDITS",
+        "rgba(255,0,0,1)",
+        "rgba(255,255,255,1)",
+        40,
+        () => {
+          this.messages.pushMessage(
+            new Message(
+              0,
+              0,
+              1280,
+              720,
+              "Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release]  \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/mortals \n Watch: http://youtu.be/yJg-Y5byMMw",
+              "rgba(255,255,255,1)",
+              40,
+              time,
+              time + 5
+            )
+          );
+          this.focused = false;
         }
       )
     );
@@ -60,11 +91,9 @@ class MenuScreen extends Screen {
     for (let j = 0; j < this.menuBtns.length; j++) {
       this.menuBtns[j].draw();
     }
-    if(this.messages.update(time)){
-      this.focused=true;
+    if (this.messages.update(time)) {
+      this.focused = true;
     }
   }
-  update() {
-    
-  }
+  update() {}
 }

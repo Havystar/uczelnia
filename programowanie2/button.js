@@ -25,7 +25,7 @@ class Button {
     ctx.save();
     ctx.fillStyle = this.backgroundColor;
     ctx.fillRect(this.x, this.y, this.width, this.height);
-    ctx.font = this.fontSize + "px Georgia";
+    ctx.font = this.fontSize + "px";
     ctx.fillStyle = this.textColor;
     ctx.textAlign = "center";
     ctx.fillText(

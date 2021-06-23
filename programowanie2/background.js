@@ -13,7 +13,7 @@ class Background {
       this.loadTexture("/src/graphics/4.png"),
     ];
     this.offset = [0, 0, 0, 0, 0];
-    this.speed = [0, 0.4, 0.8, 1.2, 2.2];
+    this.speed = [0, 0.2, 0.6, 0.8, 1.2];
     this.size = { width: 576, height: 324 };
     this.scale = { x: (1280 / 576 / 2) * 2, y: 720 / 324 };
   }
