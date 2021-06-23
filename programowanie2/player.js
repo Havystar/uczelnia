@@ -30,6 +30,12 @@ class Player extends sprite {
       this.loadTexture("/src/player/run/run-7.png"),
       this.loadTexture("/src/player/run/run-8.png"),
     ];
+    this.texturesJump = [
+      this.loadTexture("/src/player/jump/jump-1.png"),
+      this.loadTexture("/src/player/jump/jump-2.png"),
+      this.loadTexture("/src/player/jump/jump-3.png"),
+      this.loadTexture("/src/player/jump/jump-4.png"),
+    ];
     this.currentTexture = 0;
     this.bound = 6;
   }
@@ -42,10 +48,11 @@ class Player extends sprite {
       this.currentTexture = 0;
     }
   }
-
-  update() {
-    let margin = 0;
-    if (this.keyState[this.keyRight] && this.keyState[this.keyLeft]) {
+  moveInX() {
+    if (
+      (this.keyState[this.keyRight] && this.keyState[this.keyLeft]) ||
+      !this.isOnPlatform
+    ) {
       //this.velocityX = 0;
     } else if (this.keyState[this.keyLeft]) {
       if (this.velocityX <= -this.speed) {
@@ -72,8 +79,21 @@ class Player extends sprite {
         }
       }
     }
-
     this.x += this.velocityX;
+  }
+
+  jump() {
+    console.log(this.keyState);
+    this.velocityY = -5;
+  }
+
+  update() {
+    let margin = 0;
+    this.moveInX();
+
+    if (this.keyState[this.keyUp] && this.isOnPlatform) {
+      this.jump();
+    }
 
     if (Math.floor((this.x + 27) / 16) + 0.3 > Math.round((this.x + 27) / 16)) {
       margin = 0.3;
@@ -86,7 +106,7 @@ class Player extends sprite {
     this.coordinatesOnMap =
       Math.round(margin + (this.x + 27) / 16) +
       Math.round((this.y + 60) / 16) * 80;
-    if (this.isOnPlatform) {
+    if (this.isOnPlatform && this.velocityY > 0) {
       this.y = Math.floor(this.coordinatesOnMap / 80) * 16 - 64;
       this.velocityY = 0;
     } else {
