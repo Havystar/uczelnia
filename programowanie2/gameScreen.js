@@ -6,12 +6,15 @@ class GameScreen extends Screen {
     this.focused = true;
     this.background = new Background();
     this.map = new Map();
-    this.player = new Player(canvas.width / 2, canvas.height / 2);
+    this.player = new Player(100, canvas.height - 64 - 16);
     this.messages = new MessageManager();
   }
 
   update() {
     this.ticks++;
+    this.player.isOnPlatform = this.map.checkIfOnPlatform(
+      this.player.getCoordinatesOnMap()
+    );
     this.player.update();
     this.background.update(this.player.getXPosition());
     this.focused = this.messages.update(time);

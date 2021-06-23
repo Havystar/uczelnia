@@ -10,6 +10,7 @@ class Map extends sprite {
       51, 52, 76, 66, 82, 83,
     ];
     this.smallPlatform = [78, 79, 80, 91, 92, 93];
+    this.allPlatforms = this.bigPlatform.concat(this.smallPlatform);
     this.map = [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -165,6 +166,7 @@ class Map extends sprite {
       30, 32, 32, 32, 33,
     ];
   }
+
   draw() {
     ctx.save();
 
@@ -183,6 +185,14 @@ class Map extends sprite {
         );
         ctx.restore();
       }
+    }
+  }
+
+  checkIfOnPlatform(coordinates) {
+    if (this.allPlatforms.includes(this.map[coordinates] - 1)) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
