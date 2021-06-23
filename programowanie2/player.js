@@ -37,7 +37,6 @@ class Player extends sprite {
     }
   }
   update() {
-    console.log(this.x + "," + this.y);
     if (this.keyState[this.keyLeft]) {
       this.x -= this.speed;
     }

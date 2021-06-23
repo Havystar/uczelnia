@@ -48,7 +48,6 @@ class Button {
 
   onClick(mouse) {
     if (this.checkPosition(mouse.x, mouse.y) && (mouse.buttons == 1) == true) {
-      console.log(mouse);
       if (this.callback) {
         this.callback();
       }

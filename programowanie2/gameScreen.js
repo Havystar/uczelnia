@@ -3,8 +3,9 @@ class GameScreen extends Screen {
     super();
     this.pauseKey = 69;
     this.actionKey = 101;
-    this.map = new Array();
+    this.focused = true;
     this.background = new Background();
+    this.map = new Map();
     this.player = new Player(canvas.width / 2, canvas.height / 2);
     this.messages = new MessageManager();
   }
@@ -18,6 +19,7 @@ class GameScreen extends Screen {
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.background.draw(this.ticks);
+    this.map.draw();
     this.player.draw(this.ticks);
   }
   onClick(x, y, buttons) {
