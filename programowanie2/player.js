@@ -160,6 +160,35 @@ class Player extends sprite {
         64,
         60
       );
+    } else if (this.velocityY != 0 && this.velocityX >= 0) {
+      this.changeCurrentTexture(ticks, this.bound + 4, this.texturesJump);
+      ctx.drawImage(
+        this.texturesJump[this.currentTexture],
+        0,
+        0,
+        71,
+        67,
+        this.x,
+        this.y + 4,
+        64,
+        60
+      );
+    } else if (this.velocityY != 0 && this.velocityX <= 0) {
+      ctx.save();
+      ctx.setTransform(-1, 0, 0, 1, 0, 0);
+      this.changeCurrentTexture(ticks, this.bound + 4, this.texturesJump);
+      ctx.drawImage(
+        this.texturesJump[this.currentTexture],
+        0,
+        0,
+        71,
+        67,
+        -this.x - 64,
+        this.y + 4,
+        64,
+        60
+      );
+      ctx.restore();
     } else {
       ctx.drawImage(
         this.texturesIdle[0],
