@@ -5,6 +5,10 @@ class MenuScreen extends Screen {
     this.focused = true;
     this.menuBtns = new Array();
     this.messages = new MessageManager();
+    this.bckgrdAudio = new Audio("src/music/WarriyoMortals.mp3");
+    this.bckgrdAudio.volume = 0.0;
+    this.bckgrdAudio.loop = true;
+    this.bckgrdAudio.play();
     this.menuBtns.push(
       new Button(
         500,

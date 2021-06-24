@@ -8,10 +8,6 @@ class GameScreen extends Screen {
     this.map = new Map();
     this.player = new Player(100, 0);
     this.messages = new MessageManager();
-    this.bckgrdAudio = new Audio("src/music/WarriyoMortals.mp3");
-    this.bckgrdAudio.volume = 0.0;
-    this.bckgrdAudio.loop = true;
-    this.bckgrdAudio.play();
   }
 
   update() {
