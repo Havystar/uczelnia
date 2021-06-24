@@ -9,6 +9,8 @@ class Player extends sprite {
     this.keyLeft = 97;
     this.keyRight = 100;
     this.oldChanger;
+    this.oldTicks = 0;
+    this.teleportCuldown = 0;
     this.speed = 2;
     this.gravity = 4;
     this.velocityX = 0;
@@ -114,7 +116,7 @@ class Player extends sprite {
     }
   }
 
-  update() {
+  update(ticks) {
     this.isGameOver();
     this.moveInX();
     let margin = 0;
@@ -151,6 +153,10 @@ class Player extends sprite {
       }
       this.y += this.velocityY;
     }
+    if (this.teleportCuldown >= 0) {
+      this.teleportCuldown += this.oldTicks - ticks;
+      this.oldTicks = ticks;
+    }
   }
 
   draw(ticks) {
@@ -183,6 +189,19 @@ class Player extends sprite {
         60
       );
       ctx.restore();
+    } else if (this.isClimbing) {
+      this.changeCurrentTexture(this.y, this.bound + 1, this.texturesClimb);
+      ctx.drawImage(
+        this.texturesClimb[this.currentTexture],
+        0,
+        0,
+        71,
+        67,
+        this.x,
+        this.y + 4,
+        64,
+        60
+      );
     } else if (this.isOnPlatform) {
       this.changeCurrentTexture(ticks, this.bound, this.texturesIdle);
       ctx.drawImage(
@@ -225,19 +244,6 @@ class Player extends sprite {
         60
       );
       ctx.restore();
-    } else if (this.isClimbing) {
-      this.changeCurrentTexture(this.y, this.bound + 1, this.texturesClimb);
-      ctx.drawImage(
-        this.texturesClimb[this.currentTexture],
-        0,
-        0,
-        71,
-        67,
-        this.x,
-        this.y + 4,
-        64,
-        60
-      );
     } else {
       ctx.drawImage(
         this.texturesIdle[0],

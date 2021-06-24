@@ -20,7 +20,17 @@ class GameScreen extends Screen {
         this.player.getCoordinatesOnMap()
       );
     }
-    this.player.update();
+    if (
+      this.map.teleports[this.map.teleport - 1] ==
+        this.player.getCoordinatesOnMap() &&
+      this.player.teleportCuldown <= 0 &&
+      this.map.teleport > 0
+    ) {
+      this.player.y = Math.floor(this.map.newCoordinates / 80) * 16 - 64;
+      this.player.x = Math.floor(this.map.newCoordinates % 80) * 16;
+      this.player.teleportCuldown = 300;
+    }
+    this.player.update(this.ticks);
     this.background.update(this.player.getXPosition());
     this.focused = this.messages.update(time);
   }
