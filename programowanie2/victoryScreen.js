@@ -1,9 +1,8 @@
-class GameOverScreen extends Screen {
+class VictoryScreen extends Screen {
   constructor() {
     super();
-    this.ticks = 0;
     this.focused = true;
-    this.endText = "GAME OVER";
+    this.victoryText = "YOU WON!";
     this.menuBtns = new Array();
     this.menuBtns.push(
       new Button(
@@ -12,8 +11,8 @@ class GameOverScreen extends Screen {
         300,
         100,
         "PLAY AGAIN",
-        "rgba(255,0,0,1)",
-        "rgba(255,255,255,1)",
+        "rgba(0,255,0,1)",
+        "rgba(100,100,100,1)",
         40,
         () => {
           screenManager.popScreen();
@@ -28,8 +27,8 @@ class GameOverScreen extends Screen {
         300,
         100,
         "MENU",
-        "rgba(255,0,0,1)",
-        "rgba(255,255,255,1)",
+        "rgba(0,255,0,1)",
+        "rgba(100,100,100,1)",
         40,
         () => {
           screenManager.popScreen();
@@ -50,11 +49,15 @@ class GameOverScreen extends Screen {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "red";
-    ctx.font = "bold 36px Lucida Handwriting";
+    ctx.fillStyle = "rgba(0,255,0,1)";
+    ctx.font = "bold 37px Lucida Handwriting";
     for (let j = 0; j < this.menuBtns.length; j++) {
       this.menuBtns[j].draw();
     }
-    ctx.fillText(this.endText, canvas.width / 2 - 110, canvas.height / 2 - 150);
+    ctx.fillText(
+      this.victoryText,
+      canvas.width / 2 - 110,
+      canvas.height / 2 - 150
+    );
   }
 }
