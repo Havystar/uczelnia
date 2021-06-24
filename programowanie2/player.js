@@ -88,6 +88,14 @@ class Player extends sprite {
   }
 
   update() {
+    if (
+      this.x > canvas.width + 30 ||
+      this.x < -60 ||
+      this.y > canvas.height + 20
+    ) {
+      screenManager.popScreen();
+      screenManager.pushScreen(new GameOverScreen());
+    }
     let margin = 0;
     this.moveInX();
 

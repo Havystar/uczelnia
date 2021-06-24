@@ -19,6 +19,8 @@ class Button {
     this.backgroundColor = backgroundColor;
     this.fontSize = fontSize;
     this.callback = callback;
+    this.clickSound = new Audio("/src/sounds/click.mp3");
+    this.clickSound.volume = 0.3;
   }
 
   draw() {
@@ -48,6 +50,7 @@ class Button {
 
   onClick(mouse) {
     if (this.checkPosition(mouse.x, mouse.y) && (mouse.buttons == 1) == true) {
+      this.clickSound.play();
       if (this.callback) {
         this.callback();
       }
