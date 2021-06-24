@@ -19,6 +19,11 @@ class GameScreen extends Screen {
     this.player.isOnPlatform = this.map.checkIfOnPlatform(
       this.player.getCoordinatesOnMap()
     );
+    if (this.player.isClimbing) {
+      this.player.isClimbing = this.map.checkIfOnLadder(
+        this.player.getCoordinatesOnMap()
+      );
+    }
     this.player.update();
     this.background.update(this.player.getXPosition());
     this.focused = this.messages.update(time);
@@ -38,7 +43,14 @@ class GameScreen extends Screen {
       screenManager.pushScreen(new PauseScreen());
     }
     if (key == this.actionKey) {
-      // this.messages.pushMessage();
+      if (this.player.isClimbing) {
+        this.player.isClimbing = false;
+      } else {
+        this.player.isClimbing = this.map.checkIfOnLadder(
+          this.player.getCoordinatesOnMap()
+        );
+        this.player.update();
+      }
     }
     super.onKeyDown(key);
   }

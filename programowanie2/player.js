@@ -8,10 +8,12 @@ class Player extends sprite {
     this.keyDown = 115;
     this.keyLeft = 97;
     this.keyRight = 100;
+    this.oldChanger;
     this.speed = 2;
     this.gravity = 4;
     this.velocityX = 0;
     this.velocityY = 0;
+    this.isClimbing = false;
     this.isOnPlatform = false;
     this.coordinatesOnMap;
     this.texturesIdle = [
@@ -36,17 +38,28 @@ class Player extends sprite {
       this.loadTexture("/src/player/jump/jump-3.png"),
       this.loadTexture("/src/player/jump/jump-4.png"),
     ];
+    this.texturesClimb = [
+      this.loadTexture("/src/player/climb/climb-1.png"),
+      this.loadTexture("/src/player/climb/climb-2.png"),
+      this.loadTexture("/src/player/climb/climb-3.png"),
+      this.loadTexture("/src/player/climb/climb-4.png"),
+      this.loadTexture("/src/player/climb/climb-5.png"),
+      this.loadTexture("/src/player/climb/climb-6.png"),
+    ];
     this.currentTexture = 0;
     this.bound = 6;
   }
 
   changeCurrentTexture(chenger, bound, textures) {
-    if (chenger % bound == 0) {
-      this.currentTexture++;
+    if (this.oldChanger != parseInt(chenger)) {
+      if (parseInt(chenger) % bound == 0) {
+        this.currentTexture++;
+      }
+      if (this.currentTexture >= textures.length) {
+        this.currentTexture = 0;
+      }
     }
-    if (this.currentTexture >= textures.length) {
-      this.currentTexture = 0;
-    }
+    this.oldChanger = parseInt(chenger);
   }
   moveInX() {
     if (
@@ -54,6 +67,10 @@ class Player extends sprite {
       !this.isOnPlatform
     ) {
       //this.velocityX = 0;
+    } else if (this.isClimbing) {
+      this.velocityX = 0;
+      this.velocityY = 0;
+      return;
     } else if (this.keyState[this.keyLeft]) {
       if (this.velocityX <= -this.speed) {
         this.velocityX = -this.speed;
@@ -83,11 +100,10 @@ class Player extends sprite {
   }
 
   jump() {
-    console.log(this.keyState);
     this.velocityY = -5;
   }
 
-  update() {
+  isGameOver() {
     if (
       this.x > canvas.width + 30 ||
       this.x < -60 ||
@@ -96,8 +112,12 @@ class Player extends sprite {
       screenManager.popScreen();
       screenManager.pushScreen(new GameOverScreen());
     }
-    let margin = 0;
+  }
+
+  update() {
+    this.isGameOver();
     this.moveInX();
+    let margin = 0;
 
     if (this.keyState[this.keyUp] && this.isOnPlatform) {
       this.jump();
@@ -114,7 +134,15 @@ class Player extends sprite {
     this.coordinatesOnMap =
       Math.round(margin + (this.x + 27) / 16) +
       Math.round((this.y + 60) / 16) * 80;
-    if (this.isOnPlatform && this.velocityY > 0) {
+    if (this.isClimbing) {
+      if (this.keyState[this.keyUp]) {
+        this.y -= this.speed;
+      } else if (this.keyState[this.keyDown] && !this.isOnPlatform) {
+        this.y += this.speed;
+      }
+      this.velocityY = 0;
+      this.velocityX = 0;
+    } else if (this.isOnPlatform && this.velocityY > 0) {
       this.y = Math.floor(this.coordinatesOnMap / 80) * 16 - 64;
       this.velocityY = 0;
     } else {
@@ -197,6 +225,19 @@ class Player extends sprite {
         60
       );
       ctx.restore();
+    } else if (this.isClimbing) {
+      this.changeCurrentTexture(this.y, this.bound + 1, this.texturesClimb);
+      ctx.drawImage(
+        this.texturesClimb[this.currentTexture],
+        0,
+        0,
+        71,
+        67,
+        this.x,
+        this.y + 4,
+        64,
+        60
+      );
     } else {
       ctx.drawImage(
         this.texturesIdle[0],

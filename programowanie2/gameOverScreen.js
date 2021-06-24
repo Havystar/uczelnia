@@ -1,7 +1,6 @@
 class GameOverScreen extends Screen {
   constructor() {
     super();
-    this.ticks = 0;
     this.focused = true;
     this.endText = "GAME OVER";
     this.menuBtns = new Array();
