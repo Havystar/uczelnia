@@ -7,6 +7,9 @@ class GameScreen extends Screen {
     this.background = new Background();
     this.map = new Map();
     this.player = new Player(100, 0);
+    this.tasks = new Array();
+    this.activeTask = 0;
+    this.tasks.push(new Task(0, 0, 800, 400, "rgba(3,6,120,255)", [new Ocr()]));
     this.messages = new MessageManager();
   }
 
@@ -32,16 +35,34 @@ class GameScreen extends Screen {
     }
     this.player.update(this.ticks);
     this.background.update(this.player.getXPosition());
+    if (this.player.getCoordinatesOnMap() == 2040) {
+      this.tasks[this.activeTask].active = true;
+    }
     this.focused = this.messages.update(time);
+    if (this.tasks[this.activeTask].active) {
+      this.tasks[this.activeTask].update(this.ticks);
+    }
   }
   draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.background.draw(this.ticks);
     this.map.draw();
     this.player.draw(this.ticks);
+    if (this.tasks[this.activeTask].active) {
+      this.tasks[this.activeTask].draw(this.ticks);
+    }
+  }
+  onMove(x, y) {
+    super.onClick(x, y);
+    if (this.tasks[this.activeTask].active) {
+      this.tasks[this.activeTask].onMove(this.mouse);
+    }
   }
   onClick(x, y, buttons) {
     super.onClick(x, y, buttons);
+    if (this.tasks[this.activeTask].active) {
+      this.tasks[this.activeTask].onClick(this.mouse);
+    }
   }
   onKeyDown(key) {
     this.player.onKeyDown(key);
@@ -57,6 +78,9 @@ class GameScreen extends Screen {
         );
         this.player.update();
       }
+    }
+    if (this.tasks[this.activeTask].active) {
+      this.tasks[this.activeTask].onKeyDown(key);
     }
     super.onKeyDown(key);
   }

@@ -7,7 +7,7 @@ class Map extends sprite {
     this.newCoordinates = 0;
     this.teleport = 0;
     this.teleports = [486, 2418, 2463, 440, 1641];
-    this.endPoint = 2039;
+    //this.endPoint = 2039;
     this.bigPlatform = [
       0, 1, 18, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 48, 49,
       50, 51, 52, 76, 66, 82, 83,
@@ -350,10 +350,10 @@ class Map extends sprite {
   }
 
   checkIfOnPlatform(coordinates) {
-    if (coordinates == this.endPoint) {
-      screenManager.popScreen();
-      screenManager.pushScreen(new VictoryScreen());
-    }
+    // if (coordinates == this.endPoint) {
+    //   screenManager.popScreen();
+    //   screenManager.pushScreen(new VictoryScreen());
+    // }
     if (this.teleports[this.teleport] == coordinates) {
       this.teleport++;
       this.newCoordinates = this.teleports[this.teleport];
