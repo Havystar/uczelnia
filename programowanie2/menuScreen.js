@@ -65,7 +65,7 @@ class MenuScreen extends Screen {
               0,
               1280,
               720,
-              "Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release]  \n Music provided by NoCopyrightSounds \n Free Download/Stream: http://ncs.io/mortals \n Watch: http://youtu.be/yJg-Y5byMMw",
+              "Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release] Music provided by NoCopyrightSounds Free Download/Stream: http://ncs.io/mortals Watch: http://youtu.be/yJg-Y5byMMw",
               "rgba(255,255,255,1)",
               40,
               time,

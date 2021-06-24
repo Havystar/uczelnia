@@ -169,7 +169,7 @@ class Player extends sprite {
         71,
         67,
         this.x,
-        this.y + 4,
+        this.y + 8,
         64,
         60
       );
@@ -184,7 +184,7 @@ class Player extends sprite {
         71,
         67,
         -this.x - 64,
-        this.y + 4,
+        this.y + 8,
         64,
         60
       );
