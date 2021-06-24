@@ -7,7 +7,7 @@ class MessageManager {
       for (let i = 0; i < this.messageStack.length; i++) {
         if (time > this.messageStack[i].endTime) {
           this.messageStack.splice(i, 1);
-          if(this.messageStack.length == 0){
+          if (this.messageStack.length == 0) {
             return true;
           }
         } else {
@@ -15,7 +15,6 @@ class MessageManager {
         }
       }
     }
-    
   }
   pushMessage(meassage) {
     this.messageStack.push(meassage);

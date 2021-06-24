@@ -6,7 +6,7 @@ class PauseScreen extends Screen {
     this.width = canvas.width - this.x;
     this.height = canvas.height - this.y;
     this.menuBtns = new Array();
-    this.backgroundColor = "rgba(30, 120, 200, 0.6)";
+    this.backgroundColor = "rgba(120, 190, 200, 0.6)";
     this.menuBtns.push(
       new Button(
         500,
