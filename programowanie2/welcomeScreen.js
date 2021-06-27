@@ -4,8 +4,8 @@ class WelcomeScreen extends Screen {
     this.ticks = 0;
     this.bubblesWidth = 60;
     this.bubblesheight = 10;
-    this.firstStageTime = 10; //200
-    this.secoundStageTime = 10; //400
+    this.firstStageTime = 200; //200
+    this.secoundStageTime = 500; //500
     this.focused = true;
     this.bubbles = new Array();
     this.colors = ["rgb(255,0,30)", "rgb(60,0,220)"];

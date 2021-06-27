@@ -6,8 +6,9 @@ class MenuScreen extends Screen {
     this.menuBtns = new Array();
     this.messages = new MessageManager();
     this.bckgrdAudio = new Audio("src/music/WarriyoMortals.mp3");
-    this.bckgrdAudio.volume = 0.1;
+    this.bckgrdAudio.volume = 0.05;
     this.bckgrdAudio.loop = true;
+    this.firstTime = true;
     this.bckgrdAudio.play();
     this.menuBtns.push(
       new Button(
@@ -21,6 +22,7 @@ class MenuScreen extends Screen {
         40,
         () => {
           screenManager.pushScreen(new GameScreen());
+          this.firstTime = false;
         }
       )
     );
@@ -49,6 +51,7 @@ class MenuScreen extends Screen {
             )
           );
           this.focused = false;
+          this.firstTime = false;
         }
       )
     );
@@ -77,6 +80,7 @@ class MenuScreen extends Screen {
             )
           );
           this.focused = false;
+          this.firstTime = false;
         }
       )
     );
@@ -91,7 +95,9 @@ class MenuScreen extends Screen {
   }
 
   draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (!this.firstTime) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
     for (let j = 0; j < this.menuBtns.length; j++) {
       this.menuBtns[j].draw();
     }
